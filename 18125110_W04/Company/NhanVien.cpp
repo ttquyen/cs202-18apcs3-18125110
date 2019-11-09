@@ -24,9 +24,6 @@ NhanVien::NhanVien(char * mnv_, char * hoTen_)
 
 	hoTen = new char(tmp+1);
 	strcpy_s(hoTen, tmp+1, hoTen_);
-	/*for (int i = 0; i < tmp; i++) {
-		hoTen[i] = hoTen_[i];
-	}*/
 	diaChi = nullptr;
 }
 
@@ -36,9 +33,6 @@ NhanVien::NhanVien(char * mnv_, char * hoTen_, DoB ngaySinh_)
 	int sizeTen = sizeof(hoTen_) / sizeof(hoTen_[0]);
 	hoTen = new char(sizeTen);
 	strcpy_s(hoTen, sizeTen + 1, hoTen_);
-	/*for (int i = 0; i < sizeTen; i++) {
-		hoTen[i] = hoTen_[i];
-	}*/
 	ngaySinh = ngaySinh_;
 	diaChi = nullptr;
 }
@@ -49,17 +43,11 @@ NhanVien::NhanVien(char * mnv_, char * hoTen_, DoB ngaySinh_, char * diaChi_)
 	int sizeTen = sizeof(hoTen_) / sizeof(hoTen_[0]);
 	hoTen = new char(sizeTen);
 	strcpy_s(hoTen, sizeTen + 1, hoTen_);
-	/*for (int i = 0; i < sizeTen; i++) {
-		hoTen[i] = hoTen_[i];
-	}*/
 	ngaySinh = ngaySinh_;
 	int sizeDC = sizeof(diaChi_) / sizeof(diaChi_[0]);
-	
+
 	diaChi = new char(sizeDC);
 	strcpy_s(diaChi, sizeDC + 1, diaChi_);
-	/*for (int i = 0; i < sizeDC; i++) {
-		diaChi[i] = diaChi_[i];
-	}*/
 }
 
 void NhanVien::input()

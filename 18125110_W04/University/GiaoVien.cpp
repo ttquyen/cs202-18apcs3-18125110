@@ -29,7 +29,6 @@ GiaoVien::GiaoVien(string mgv_, float heSoLuong_)
 	luong = 0;
 }
 
-
 GiaoVien::GiaoVien(string mgv_, float heSoLuong_, int soNgayNghi_)
 {
 	mgv = mgv_;
@@ -89,23 +88,23 @@ GiaoVien::~GiaoVien()
 {
 }
 
-GVCN::GVCN()
+GVCN::GVCN():GiaoVien()
 {
 }
 
-GVCN::GVCN(string mgv_)
+GVCN::GVCN(string mgv_):GiaoVien(mgv_)
 {
 }
 
-GVCN::GVCN(string mgv_, float heSoLuong_)
+GVCN::GVCN(string mgv_, float heSoLuong_):GiaoVien(mgv_, heSoLuong_)
 {
 }
 
-GVCN::GVCN(string mgv_, float heSoLuong_, int soNgayNghi_)
+GVCN::GVCN(string mgv_, float heSoLuong_, int soNgayNghi_):GiaoVien(mgv_, heSoLuong_, soNgayNghi_)
 {
 }
 
-GVCN::GVCN(const string mgv_, float heSoLuong_, int luongCoBan_, int soNgayNghi_)
+GVCN::GVCN(const string mgv_, float heSoLuong_, int luongCoBan_, int soNgayNghi_):GiaoVien(mgv_, heSoLuong_, luongCoBan_, soNgayNghi_)
 {
 }
 
