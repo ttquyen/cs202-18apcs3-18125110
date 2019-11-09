@@ -1,0 +1,91 @@
+Base b1;
+---> in ra: Base constructor-0 param
+
+Base b2(3);
+---> in ra: Base constructor-1 param (do Base(int u))
+
+Base*pb =new Base(1);
+---> in ra: Base constructor-1 param 
+(do khởi tạo con trỏ pb trỏ đến Base(int u))
+
+DerivedA da1;
+--->in ra:
+Base constructor-0 param
+DerivedA constructor-0 param
+(do DerivedA kế thừa Base nên khi khởi tạo phải gọi Constructor default của Base)
+
+DerivedA da2(2);
+--->in ra:
+Base constructor-0 param
+DerivedA constructor-1 param
+(do DerivedA kế thừa Base nên khi khởi tạo phải gọi Constructor default của Base, 
+sau đó đến constructor DerivedA(int u))
+
+DerivedA da3(2, 3);
+--->in ra:
+Base constructor-0 param
+DerivedA constructor-2 param
+(do DerivedA kế thừa Base nên khi khởi tạo phải gọi Constructor default của Base, 
+sau đó đến constructor DerivedA(int u, int x))
+
+DerivedA da4(da2);
+--->in ra:
+Base constructor-0 param
+(do Copy Constructor nhưng biến truyền vào (DerivedA &da) phải khởi tạo lại và gọi constructor của Base)
+
+pb = new DerivedA(4, 5);
+--->in ra:
+Base constructor-0 param
+DerivedA constructor-2 params
+((do new DerivedA(4,5): khởi tạo lại và gọi constructor của Base, sau đó mới tạo constructor của DerivedA(int, int))
+
+DerivedB db1;
+--->in ra:
+Base constructor-0 param
+DerivedB constructor-0 param
+(do DerivedB kế thừa Base nên khi khởi tạo phải gọi Constructor default của Base)
+
+DerivedB db2(2.7);
+--->in ra:
+Base constructor-0 param
+DerivedB constructor-1 param
+(do DerivedB kế thừa Base nên khi khởi tạo phải gọi Constructor default của Base, 
+sau đó đến constructor DerivedB(float x))
+
+DerivedB db3(3, 2.7);
+--->in ra:
+Base constructor-1 param
+DerivedB constructor-2 param
+(do DerivedB kế thừa Base(int) nên khi khởi tạo phải gọi Constructor Base(int) của Base, 
+sau đó đến constructor DerivedB(float x, int u))
+
+DerivedB db4(db2);
+--->in ra:
+Base copy constructor
+DerivedB copy constructor
+(trước tiên, copy constructor Base (vì db2 đã được khởi tạo từ trước và có giá trị rồi)
+sau đó copy construtor của DB(vì :Base(db))
+
+pb = new DerivedB(4, 5);
+--->in ra:
+Base constructor-1 param
+DerivedB constructor-2 params
+((do new DerivedB(4,5): khởi tạo lại và gọi constructor Base(int) của Base, sau đó mới tạo constructor của DerivedB(int, float))
+
+f(b1);
+--->in ra:
+Base copy constructor
+Function f
+Base destructor
+(truyền vào b1-->in ra dòng đầu; vào trong hàm f -->in ra dòng 2;hàm ở global nên kết thúc sẽ vào destructor của Base)
+
+f(da1); f(db1);
+--->in ra:
+Base copy constructor
+Function f
+Base destructor
+(tương tự câu trên do DA, DB kế thừa Base)
+
+delete pb;
+--->in ra:
+Base destructor
