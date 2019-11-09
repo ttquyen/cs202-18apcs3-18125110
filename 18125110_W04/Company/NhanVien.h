@@ -3,10 +3,15 @@
 #include<iostream>
 #include<string>
 using namespace std;
-struct DoB {
+class DoB {
+private:
 	int ngay;
 	int thang;
 	int nam;
+public:
+	DoB();
+	void input();
+	void output();
 };
 class NhanVien
 {
@@ -32,12 +37,13 @@ public:
 	NVSanXuat(char *mnv_, int soSP);
 	NVSanXuat(char *mnv_, int soSP, char *hoTen_);
 	NVSanXuat(char *mnv_, int soSP, char *hoTen_ ,DoB ngaySinh_);
-	int tinhLuong();
+	void inputSanXuat();
 	void displayLuong();
 	~NVSanXuat();
 private:
 	int soSanPham;
 	int Luong;
+	int tinhLuong();
 };
 class NVCongNhat :public NhanVien {
 public:
@@ -46,12 +52,12 @@ public:
 	NVCongNhat(char *mnv_, int soNgay);
 	NVCongNhat(char *mnv_, int soNgay, char *hoTen_);
 	NVCongNhat(char *mnv_, int soNgay, char *hoTen_, DoB ngaySinh_);
-	int tinhLuong();
 	void inputCongNhat();
 	void displayLuong();
 	~NVCongNhat();
 private:
 	int soNgay;
 	int Luong;
+	int tinhLuong();
 };
 #endif // !NHANVIEN_H
