@@ -47,7 +47,7 @@ public:
 	NVCongNhat(char *mnv_, int soNgay, char *hoTen_);
 	NVCongNhat(char *mnv_, int soNgay, char *hoTen_, DoB ngaySinh_);
 	int tinhLuong();
-	void inputNgay();
+	void inputCongNhat();
 	void displayLuong();
 	~NVCongNhat();
 private:

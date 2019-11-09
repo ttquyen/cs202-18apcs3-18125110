@@ -27,6 +27,7 @@ NhanVien::NhanVien(char * mnv_, char * hoTen_)
 {
 	mnv = mnv_;
 	int tmp = sizeof(hoTen_) / sizeof(hoTen_[0]);
+
 	hoTen = new char(tmp+1);
 	strcpy_s(hoTen, tmp+1, hoTen_);
 	/*for (int i = 0; i < tmp; i++) {
@@ -76,20 +77,25 @@ NhanVien::NhanVien(char * mnv_, char * hoTen_, DoB ngaySinh_, char * diaChi_)
 
 void NhanVien::input()
 {
-	char *tmp = new char[100];
+	char *tmp = nullptr;
+	tmp = new char[50];
 	cout << "Please input: \n";
 	cout << "Ma Nhan Vien: ";
-	cin.ignore();
+	//cin.ignore();
 	cin.getline(tmp, '\n');
 	mnv = new char[(strlen(tmp)) + 1];
 	strcpy_s(mnv, (strlen(tmp)) + 1, tmp);
 	cout << "Ho Ten:";
 	//cin.ignore();
-	cin.getline(tmp, '\n');
-	hoTen = new char[(strlen(tmp)) + 1];
-	strcpy_s(hoTen, (strlen(tmp)) + 1, tmp);
 	delete[]tmp;
 	tmp = nullptr;
+	char *tmp_ = new char[100];
+	cin.getline(tmp_,'\n');
+	hoTen = new char[(strlen(tmp_)) + 1];
+	strcpy_s(hoTen, (strlen(tmp_)) + 1, tmp_);
+	delete[]tmp_;
+	tmp_ = nullptr;
+	//cin.ignore();
 	cout << "Ngay sinh: ";
 	cin >> ngaySinh.ngay;
 	cout << "Thang sinh: ";
@@ -97,7 +103,6 @@ void NhanVien::input()
 	cout << "Nam sinh: ";
 	cin >> ngaySinh.nam;
 	cout << "Dia chi: ";
-	//cin.ignore();
 	tmp = new char[100];
 	cin.getline(tmp, '\n');
 	diaChi = new char[(strlen(tmp)) + 1];
@@ -108,10 +113,10 @@ void NhanVien::input()
 
 void NhanVien::display()
 {
-	cout << "Ma Nhan Vien: " << *mnv << endl;
-	cout << "Ho Ten:" << *hoTen << endl;
+	cout << "Ma Nhan Vien: " << mnv << endl;
+	cout << "Ho Ten:" << hoTen << endl;
 	cout << "Ngay Sinh: " << ngaySinh.ngay << "/" << ngaySinh.thang << "/" << ngaySinh.nam << endl;
-	cout << "Dia Chi: " << *diaChi << endl;
+	cout << "Dia Chi: " << diaChi << endl;
 }
 
 NhanVien::~NhanVien()
@@ -205,7 +210,7 @@ int NVCongNhat::tinhLuong()
 	return soNgay*300;
 }
 
-void NVCongNhat::inputNgay()
+void NVCongNhat::inputCongNhat()
 {
 	NhanVien::input();
 	cout << "So Ngay Cong: ";
