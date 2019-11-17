@@ -3,13 +3,13 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include<iomanip>
 using namespace std;
 class DoB {
-private:
+public:
 	int ngay;
 	int thang;
 	int nam;
-public:
 	DoB();
 	void input();
 	void output();
@@ -26,6 +26,9 @@ public:
 	virtual void display();
 	virtual double tinhLuong();
 	virtual int getTypeNV();
+	bool checkMNV(char *mnv_);
+	bool checkTenNV(char*ten);
+	bool checkThang5();
 	~NhanVien();
 private:
 	char *mnv;
@@ -75,5 +78,11 @@ public:
 	double TinhTongLuong();
 	int soNVSX();
 	int soNVCN();
+	NhanVien* findMax();
+	double tinhLuongTB();
+	NhanVien* timTheoMNV(char* mnv_);
+	NhanVien* timTheoTen(char* tenNV);
+	bool lietKeTheoLuong();
+	bool lietKeTheoThangSinh();
 };
 #endif // !NHANVIEN_H

@@ -101,6 +101,24 @@ int NhanVien::getTypeNV()
 {
 	return 0;
 }
+bool NhanVien::checkMNV(char * mnv_)
+{
+	if (strcmp(mnv_, mnv)==0)
+		return true;
+	return false;
+}
+bool NhanVien::checkTenNV(char * ten)
+{
+	if (strcmp(ten, hoTen) == 0)
+		return true;
+	return false;
+}
+bool NhanVien::checkThang5()
+{
+	if (ngaySinh.thang == 5)
+		return true;
+	return false;
+}
 NhanVien::~NhanVien()
 {
 	delete[]mnv;
@@ -152,7 +170,7 @@ void NVSanXuat::display()
 {
 	NhanVien::display();
 	cout << "So san pham: " << soSanPham << endl;
-	cout << "Luong:  " << tinhLuong() << "000" << endl;
+	cout << "Luong:  " << tinhLuong() <<"000"<< endl;
 }
 
 NVSanXuat::~NVSanXuat()
@@ -183,27 +201,22 @@ double NVCongNhat::tinhLuong()
 {
 	return NhanVien::tinhLuong()+soNgay*300;
 }
-
 int  NVCongNhat::getTypeNV()
 {
 	return 2;
 }
-
-
 void NVCongNhat::input()
 {
 	NhanVien::input();
 	cout << "So Ngay Cong: ";
 	cin >> soNgay;
 }
-
 void NVCongNhat::display()
 {
 	NhanVien::display();
 	cout << "So Ngay: " << soNgay << endl;
 	cout << "Luong: " << tinhLuong() << "000" << endl;
 }
-
 NVCongNhat::~NVCongNhat()
 {
 }
@@ -289,4 +302,67 @@ int CongTy::soNVCN()
 			tmp += 1;
 	}
 	return tmp;
+}
+
+NhanVien * CongTy::findMax()
+{
+	NhanVien* tmp=a[0];
+	for (int i = 0; i < a.size(); i++) {
+		tmp->tinhLuong() < a[i]->tinhLuong();
+		tmp = a[i];
+	}
+	return tmp;
+}
+
+double CongTy::tinhLuongTB()
+{
+	return TinhTongLuong() / a.size();
+}
+
+NhanVien * CongTy::timTheoMNV(char * mnv_)
+{
+	for (int i = 0; i < a.size(); i++) {
+		if (a[i]->checkMNV(mnv_) == true)
+			return a[i];
+	}
+	return nullptr;
+}
+
+NhanVien * CongTy::timTheoTen(char * tenNV)
+{
+	for (int i = 0; i < a.size(); i++) {
+		if (a[i]->checkTenNV(tenNV) == true)
+			return a[i];
+	}
+	return nullptr;
+}
+
+bool CongTy::lietKeTheoLuong()
+{
+	int count = 0;
+	for (int i = 0; i < a.size(); ++i) {
+		if (a[i]->tinhLuong() < 3000)
+		{
+			a[i]->display();
+			count += 1;
+		}
+	}
+	if (count != 0)
+		return true;
+	return false;
+}
+
+bool CongTy::lietKeTheoThangSinh()
+{
+	int count = 0;
+	for (int i = 0; i < a.size(); ++i) {
+		if (a[i]->checkThang5()==true)
+		{
+			a[i]->display();
+			count += 1;
+		}
+	}
+	if (count != 0)
+		return true;
+	return false;
 }
