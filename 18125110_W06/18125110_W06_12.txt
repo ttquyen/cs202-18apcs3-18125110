@@ -1,0 +1,103 @@
+2.b.
+main() does not run because Face is an abstract class, can not declare in global scope.
+It prints:
+Shape: Rectangle
+Shape: Rectangle
+Shape: Rectangle
+The same 3 lines ?
+
+
+Code:
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+class IFace {
+public:
+	virtual void show() = 0;
+	virtual IFace* clone() = 0;
+	virtual ~IFace() {
+	}
+};
+
+class Face : public IFace {
+private:
+	string shape;
+protected:
+	string getShape()
+	{
+		return shape;
+	}
+public:
+	Face()
+	{
+		shape = "";
+	};
+	Face(string sh) : shape(sh) 
+	{
+	}
+	virtual void show() 
+	{
+		cout << "Shape: " << shape << endl;
+	}
+	Face* clone();
+	~Face() {	}
+};
+Face * Face::clone()
+{
+	Face* tmp = new Face(this->shape);
+	return tmp;
+}
+
+
+class EyedFace:public Face {
+private:
+	string shape;
+	int eyes;
+public:
+	EyedFace(string str_, int eyes_);
+	void show();
+	EyedFace* clone();
+	int count=0;
+	~EyedFace() { count -= 1; }
+};
+
+EyedFace::EyedFace(string str_, int eyes_):Face(str_)
+{
+	count += 1;
+	eyes = eyes_;
+}
+
+void EyedFace::show()
+{
+	cout << " Shape: " << shape << endl;
+	cout << " Eyes: " << eyes << endl;
+}
+
+EyedFace * EyedFace::clone()
+{
+	EyedFace* tmp= new EyedFace(this->getShape(), this->eyes);
+	count += 1;
+	return tmp;
+}
+ 
+void testFace(IFace* fc) {
+	IFace* a[3] = { fc, fc->clone(), fc->clone() };
+	for (int i = 0; i < 3; i++) {
+		a[i]->show();
+	}
+	cout << "The same 3 lines ? ";
+	delete a[1];
+	delete a[2];
+}
+
+int main() {
+	Face fc;
+	Face fc1("Rectangle");
+	testFace(&fc1);
+	EyedFace e("abc", 1);
+	cout << "Num: "<<e.count << endl;
+	return 0;
+}
+

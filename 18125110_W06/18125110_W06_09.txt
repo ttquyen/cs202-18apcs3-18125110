@@ -1,0 +1,98 @@
+class Bike {
+private:
+	char* brand; 
+public:
+	Bike();
+	~Bike();
+	Bike(Bike &a);
+	Bike& operator=(Bike &a);
+	virtual void move(int t1) 
+	{
+		cout << brand << ":" << t1 * 12 << " ";
+	}
+};
+class EBike : public Bike 
+{
+public: 
+	EBike();
+	~EBike();
+	EBike(EBike& a);
+	EBike& operator=(EBike &a);
+	void move(int t2)
+	{
+		Bike::move(t2 * 2);
+	}
+};
+void display(Bike& a, EBike& b) 
+{
+	a.move(2);
+	b.move(2);
+}
+
+Bike::Bike()
+{
+	char b[20] = "BMW";
+	brand = new  char[strlen(b) + 1];
+	strcpy_s(brand, strlen(b) + 1, b);
+
+}
+
+Bike::~Bike()
+{
+	delete[]brand;
+}
+
+Bike::Bike(Bike & a)
+{
+	int size_ = strlen(a.brand) + 1;
+	brand = new char[size_];
+	strcpy_s(brand, size_, a.brand);
+}
+
+Bike & Bike::operator=(Bike & a)
+{
+	Bike tmp;
+	delete[]tmp.brand;
+	int size_ = strlen(a.brand) + 1;
+	strcpy_s(tmp.brand, size_, a.brand);
+	return tmp;
+}
+EBike::EBike():Bike()
+{
+}
+
+EBike::~EBike()
+{
+}
+
+EBike::EBike(EBike & a):Bike(a)
+{
+
+}
+
+EBike & EBike::operator=(EBike & a)
+{
+	EBike tmp = a;
+	return tmp;
+}
+
+
+1.b
+It prints: BMW:48 BMW:48
+Explain:
+Copy constructor of Bike --> b1.brand=BMW 
+Function move of EBike ---> t=4
+t*12=48 ----> BMW:48
+similar with b2
+
+1.c
+Class: Bike, EBike
+Object: b1, b2
+An object is defined by two terms: attributes and behaviours
+Objects are the building blocks of an OO program.
+A program that uses OO technology is basically a collection of objects.
+
+A class is a blueprint for an object. When you instantiate an object, you use a
+class as the basis for how the object is built.
+A class can be thought of as a sort of higher-level data type.
+A class can be declared once.
