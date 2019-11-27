@@ -1,4 +1,3 @@
-
 #pragma once
 #include<iostream>
 using namespace std;
@@ -20,7 +19,7 @@ public:
 	void setItem(T value, int index);
 	void print();
 	void add(T value);
-	/*void addRange(T *a, int n);
+	void addRange(T *a, int n);
 	void clear();
 	bool contains(T value);
 	void toArray(T *arr, int &n);
@@ -33,7 +32,7 @@ public:
 	void reverse();
 	string toString();
 	void sortAsc();
-	void sortDesc();*/
+	void sortDesc();
 };
 
 
@@ -83,7 +82,6 @@ void MyVector<T>::print()
 	}
 }
 
-
 template<class T>
 void MyVector<T>::add(T value)
 {
@@ -97,6 +95,62 @@ void MyVector<T>::add(T value)
 		size++;
 	
 }
+
+template<class T>
+void MyVector<T>::clear()
+{
+	delete[]arr;
+	arr = nullptr;
+	size = 0;
+}
+
+template<class T>
+bool MyVector<T>::contains(T value)
+{
+	if (indexOf(value) != -1)
+		return true;
+	return false;
+}
+
+template<class T>
+bool MyVector<T>::equals(const MyVector & v)
+{
+	if(size!=v.size)
+	return false;
+	else {
+		for (int i = 0; i < size; i++) {
+			if (arr[i] != v.arr[i])
+				return false;
+		}
+	}
+	return true;
+}
+
+template<class T>
+int MyVector<T>::indexOf(T value)
+{
+	for (i = 0; i < size; i++) {
+		if (arr[i] == value)
+			return i;
+	}
+	return -1;
+}
+
+//template<class T>
+//void MyVector<T>::addRange(T * a, int n)
+//{
+//	//int size_ = n;
+//	T *tmp = new T[size+n];
+//	for (int i = 0; i < size; i++) {
+//		tmp[i] = this[i];
+//	}
+//	for (int j= size; j < size + n; j++) {
+//		tmp[j] = a[j-size];
+//	}
+//	this = nullptr;
+//	size += n;
+//	
+//}
 
 template<class T>
 MyVector<T>::MyVector(int n)
@@ -186,4 +240,22 @@ int main() {
 	v2.print();
 	system("pause");
 	return 0;
+}
+
+template<class T>
+int MyVector<T>::lastIndexOf(T value)
+{
+	return value.getSize();
+}
+
+template<class T>
+void MyVector<T>::reverse()
+{
+	T *tmp = new t[size];
+	for (int i = 0; i < size; i++) {
+		tmp[i] = this[i];
+	}
+	for (int j = 0; j < size; j++) {
+		this[j]=tmp[size-1-j];
+	}
 }
